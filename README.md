@@ -4,8 +4,6 @@
 
 Z is the compressibility factor, Z = PV/RT. It compares a real gas with an ideal gas at the same temperature and density. Z = 1 means the gas behaves ideally. Below 1, molecules attract each other more than they repel, so the pressure is lower than ideal. Above 1, repulsion dominates, so the pressure is higher than ideal. Every Z value below is on that scale.
 
-The simulations were run by the author, and all analysis code in this repo was written by the author, including the filtering, sorting, Z calculation, and comparison code.
-
 ## The numbers, with their limits
 
 Within these five gases at these conditions, deviation from ideal behaviour increases in the order He < Ne < Ar < Kr < Xe. That ordering applies to the temperatures and densities tested here. It does not hold everywhere: at low density and high temperature, all gases approach Z = 1.
