@@ -4,7 +4,7 @@
 
 Z is the compressibility factor, Z = PV/RT. It compares a real gas with an ideal gas at the same temperature and density. Z = 1 means the gas behaves ideally. Below 1, molecules attract each other more than they repel, so the pressure is lower than ideal. Above 1, repulsion dominates, so the pressure is higher than ideal. Every Z value below is on that scale.
 
-I ran the simulations and wrote all the analysis code in this repo, including the filtering, sorting, Z calculation, and comparison code.
+The simulations were run by the author, and all analysis code in this repo was written by the author, including the filtering, sorting, Z calculation, and comparison code.
 
 ## The numbers, with their limits
 
@@ -22,9 +22,9 @@ The plots use quasi-isotherms at nominal 10, 200, and 400 K. A quasi-isotherm is
 
 ## Reproduce it
 
-Open `md-gas-compressibility.nb` in Mathematica and evaluate it from the first cell to the last. It loads the simulation output from Wolfram Cloud, so you'll need a connection.
+Open `md-gas-compressibility.nb` in Mathematica and evaluate it from the first cell to the last. It loads the simulation output from Wolfram Cloud, so a connection is needed.
 
-You should get the same Z tables, the same quasi-isotherm plots at 10, 200, and 400 K, and the same 400 K NIST comparison.
+Running it produces the same Z tables, the same quasi-isotherm plots at 10, 200, and 400 K, and the same 400 K NIST comparison.
 
 Sample output (argon):
 
