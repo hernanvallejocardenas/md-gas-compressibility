@@ -1,0 +1,357 @@
+Notebook[{Cell[
+CellGroupData[{Cell[
+BoxData[{RowBox[{"\n",RowBox[{RowBox[{"rawData"," ","="," ",RowBox[
+{"CloudImport","[","\"https://www.wolframcloud.com/env/hvallejocardenas/Lab2S2/Exp%202%20-%20MD_VMD%20-%20Sheet1.csv\"","]"}]}],";"}]}],"\n",StyleBox[
+RowBox[{RowBox[{"(*",RowBox[{RowBox[{"only"," ","keeps"," ","row"," ","IF"," ","row"," ","has"," ","at"," ","least"," ","6"," ","columns"}],","," ",RowBox[
+{"first"," ","columns"," ","is"," ","a"," ","string"}],","," ",RowBox[{"the"," ","text"," ","in"," ","the"," ","first"," ","column"," ","isnt"," ","the"," ","word"," ","Gas"}],","," ",RowBox[
+{"and"," ","first"," ","column"," ","isnt"," ","blank"}]}]," ","*)"}],"\n","\n",RowBox[
+{RowBox[{"dataRows"," ","="," ",RowBox[{"Select","[",RowBox[{"rawData",","," ",RowBox[
+{RowBox[{RowBox[{RowBox[{"Length","[","#","]"}]," ","\[GreaterEqual]"," ","6"}]," ","&&"," ",RowBox[
+{"MemberQ","[",RowBox[{RowBox[{"{",RowBox[{"\"Ar\"",","," ","\"He\"",","," ","\"Ne\"",","," ","\"Kr\"",","," ","\"Xe\""}],"}"}],","," ",RowBox[
+{"StringTrim","[",RowBox[{"ToString","[",RowBox[{"#","[",RowBox[{"[","1","]"}],"]"}],"]"}],"]"}]}],"]"}]}]," ","&"}]}],"]"}]}],";"}]}]],RowBox[
+{"\n","\n","\n"}],StyleBox[RowBox[{RowBox[{"(*"," ",RowBox[{"trim"," ","strings"," ","for"," ","the"," ","gas"," ","names"," ","and"," ","convert"," ","the"," ","rest"," ","to"," ","numbers"}]," ","*)"}],"\n",RowBox[
+{RowBox[{"cleanData"," ","="," ",RowBox[{"Table","[",RowBox[{RowBox[{"{","\n","  ",RowBox[
+{RowBox[{"StringTrim","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","1","]"}],"]"}],"]"}],"]"}],","," ","\n","  ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","2","]"}],"]"}],"]"}],"]"}],","," ","\n","  ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","3","]"}],"]"}],"]"}],"]"}],","," ","\n","  ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","4","]"}],"]"}],"]"}],"]"}],","," ","\n","  ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","5","]"}],"]"}],"]"}],"]"}],","," ","\n","  ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","6","]"}],"]"}],"]"}],"]"}]}],"\n","}"}],","," ",RowBox[
+{"{",RowBox[{"row",","," ","dataRows"}],"}"}]}],"]"}]}],";"}]}]],RowBox[{"\n","\n"}],RowBox[
+{RowBox[{"headers"," ","="," ",RowBox[{"{",RowBox[{"\"Gas\"",","," ","\"Density (mol/m^3)\"",","," ","\"Init Temp (K)\"",","," ","\"Avg Temp (K)\"",","," ","\"Pressure (Pa)\"",","," ","\"Compressibility (Z)\""}],"}"}]}],";"}],RowBox[
+{"\n","\n","\n"}],RowBox[{RowBox[{"Print","[",RowBox[{RowBox[{"Style","[",RowBox[
+{"\"Question 1: Simulation Results\"",","," ","20",","," ","Bold"," ",",","DarkRed"}],"]"}],",","\"\\n\""}],"]"}],";"}],"\n",StyleBox[
+RowBox[{RowBox[{"(*",RowBox[{"add"," ","data"," ","at"," ","beginning"," ","of"," ","table"}]," ","*)"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"Grid","[",RowBox[{RowBox[{"Prepend","[",RowBox[{"cleanData",","," ","headers"}],"]"}],","," ",RowBox[
+{"Frame"," ","\[Rule]"," ","All"}],","," ",RowBox[{"Background"," ","\[Rule]"," ",RowBox[
+{"{",RowBox[{"None",","," ",RowBox[{"{",RowBox[{"LightGray",","," ","None"}],"}"}]}],"}"}]}]}],"]"}],"]"}],";"}]}]],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{"Print","[",RowBox[{"\"\\n\"",","," ",RowBox[{"Style","[",RowBox[
+{"\"Question 2: Discuss the conditions under which you saw significant negative and positive deviations\nfrom the ideal gas compressibility for Ar.\"",","," ","20",","," ","Bold",","," ","DarkRed"}],"]"}],","," ","\"\\n\""}],"]"}],";"}],"\n",StyleBox[
+RowBox[{RowBox[{"(*",RowBox[{"keep"," ","row"," ","if"," ","column"," ","1"," ","is"," ","exactly"," ","Ar"}],"*)"}],"\n",RowBox[
+{RowBox[{"arData"," ","="," ",RowBox[{"Select","[",RowBox[{"cleanData",","," ",RowBox[
+{RowBox[{RowBox[{"#","[",RowBox[{"[","1","]"}],"]"}]," ","=="," ","\"Ar\""}]," ","&"}]}],"]"}]}],";"}]}]],"\n",StyleBox[
+RowBox[{RowBox[{"(*",RowBox[{"Sort"," ","the"," ","entire"," ","list"," ","from"," ","lowest"," ","Z"," ","to"," ","highest"," ","looking"," ","at"," ","column"," ","6"}],"*)"}],"\n",RowBox[
+{RowBox[{"sortedAr"," ","="," ",RowBox[{"SortBy","[",RowBox[{"arData",","," ",RowBox[
+{RowBox[{"#","[",RowBox[{"[","6","]"}],"]"}]," ","&"}]}],"]"}]}],";"}]}]],RowBox[
+{"\n","\n"}],RowBox[{"Print","[",RowBox[{RowBox[{"Style","[",RowBox[{"\"a) Under what conditions is ideal behavior expected? Do these results match your expectations for conditions under which deviations from ideality should occur?\"",",","12",",","Bold",","," ","DarkBlue"}],"]"}],",","\"\\n\""}],"]"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"\"Ideal behavior is expected at low densities where Z is approximately 1. These results match our expectations because we observed that as density increases, Z decreases\"",",","\"\\n\""}],"]"}],";"}],"\n",RowBox[
+{"Print","[",RowBox[{RowBox[{"Style","[",RowBox[{"\"b)\[NonBreakingSpace]Inspect the animated trajectories for the simulations. Do you observe qualitative evidence supporting the quantitative deviations in compressibility? (Hint: It might help to show representative frames from the simulations here and in response to other questions.)\"",","," ","12",","," ","Bold",","," ","DarkBlue"}],"]"}],",","\"\\n\""}],"]"}],"\n",StyleBox[
+RowBox[{RowBox[{"(*",RowBox[{RowBox[{"if"," ","column"," ","is"," ","Ar"}],","," ",RowBox[
+{"sort"," ","the"," ","list"," ","from"," ","lowest"," ","to"," ","highest"}],","," ",RowBox[
+{"use"," ","First"," ","to"," ","grab"," ","lowest"," ","Z"}],","," ",RowBox[{"and"," ","use"," ","abs"," ","to"," ","sort"," ","by"," ","smallest"," ","distance"," ","from"," ","1"}]}],"*)"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"\"Most Ideal Behavior observed: \"",","," ",RowBox[
+{"First","[",RowBox[{"SortBy","[",RowBox[{"arData",","," ",RowBox[{RowBox[{"Abs","[",RowBox[
+{RowBox[{"#","[",RowBox[{"[","6","]"}],"]"}]," ","-"," ","1"}],"]"}]," ","&"}]}],"]"}],"]"}]}],"]"}],";"}]}]],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{"Print","[","\"\\nSignificant negative deviations (Z < 1) occur when attractive forces dominate.\"","]"}],";"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"\"Most Negative Deviation observed: \"",","," ",RowBox[
+{"First","[","sortedAr","]"}]}],"]"}],";"}],RowBox[{"\n","\n"}],RowBox[{RowBox[{"Print","[","\"\\nSignificant positive deviations (Z > 1) occur when repulsive forces dominate at high densities.\"","]"}],";"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"\"Most Positive Deviation observed: \"",","," ",RowBox[
+{"Last","[","sortedAr","]"}]}],"]"}],";"}],RowBox[{"\n","\n","\n"}],RowBox[{RowBox[
+{"Print","[",RowBox[{"\"\\n\"",","," ",RowBox[{"Style","[",RowBox[{"\"Question 3: Quasi-Isotherms\"",","," ","20",","," ","Bold",","," ","DarkRed"}],"]"}]}],"]"}],";"}],RowBox[
+{"\n","\n"}],StyleBox[RowBox[{RowBox[{"(*"," ",RowBox[{RowBox[{"class"," ","data"," ","is"," ","in"," ","columns"," ","10"," ",RowBox[
+{"(","Density",")"}]}],","," ",RowBox[{"11"," ",RowBox[{"(",RowBox[{"10","K"}],")"}]}],","," ",RowBox[
+{"12"," ",RowBox[{"(",RowBox[{"200","K"}],")"}]}],","," ",RowBox[{"and"," ","13"," ",RowBox[
+{"(",RowBox[{"400","K"}],")"}]}]}]," ","*)"}],"\n",RowBox[{"(*"," ",RowBox[{"skips"," ","the"," ","text"," ","headers"," ","and"," ","only"," ","grabs"," ","the"," ","rows"," ","with"," ","numbers"}]," ","*)"}],"\n",RowBox[
+{RowBox[{"classDataRows"," ","="," ",RowBox[{"Select","[",RowBox[{"rawData",","," ",RowBox[
+{RowBox[{RowBox[{RowBox[{"Length","[","#","]"}]," ","\[GreaterEqual]"," ","13"}]," ","&&"," ",RowBox[
+{"NumberQ","[",RowBox[{"Quiet","[",RowBox[{"ToExpression","[",RowBox[{"ToString","[",RowBox[
+{"#","[",RowBox[{"[","10","]"}],"]"}],"]"}],"]"}],"]"}],"]"}]}]," ","&"}]}],"]"}]}],";"}]}]],RowBox[
+{"\n","\n"}],StyleBox[RowBox[{RowBox[{"(*"," ",RowBox[{RowBox[{"get"," ","the"," ","X"}],",",RowBox[
+{"Y"," ","pairs"," ","for"," ","each"," ","of"," ","the"," ","three"," ","temperatures"}]}]," ","*)"}],"\n",RowBox[
+{RowBox[{"iso10K"," ","="," ",RowBox[{"Table","[",RowBox[{RowBox[{"{",RowBox[{RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","10","]"}],"]"}],"]"}],"]"}],","," ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","11","]"}],"]"}],"]"}],"]"}]}],"}"}],","," ",RowBox[
+{"{",RowBox[{"row",","," ","classDataRows"}],"}"}]}],"]"}]}],";"}]}]],"\n",RowBox[
+{RowBox[{"iso200K"," ","="," ",RowBox[{"Table","[",RowBox[{RowBox[{"{",RowBox[{RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","10","]"}],"]"}],"]"}],"]"}],","," ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","12","]"}],"]"}],"]"}],"]"}]}],"}"}],","," ",RowBox[
+{"{",RowBox[{"row",","," ","classDataRows"}],"}"}]}],"]"}]}],";"}],"\n",RowBox[{RowBox[
+{"iso400K"," ","="," ",RowBox[{"Table","[",RowBox[{RowBox[{"{",RowBox[{RowBox[{"ToExpression","[",RowBox[
+{"ToString","[",RowBox[{"row","[",RowBox[{"[","10","]"}],"]"}],"]"}],"]"}],","," ",RowBox[
+{"ToExpression","[",RowBox[{"ToString","[",RowBox[{"row","[",RowBox[{"[","13","]"}],"]"}],"]"}],"]"}]}],"}"}],","," ",RowBox[
+{"{",RowBox[{"row",","," ","classDataRows"}],"}"}]}],"]"}]}],";"}],RowBox[{"\n","\n"}],RowBox[
+{RowBox[{"Print","[",RowBox[{"ListLinePlot","[",RowBox[{RowBox[{"{",RowBox[{"iso10K",","," ","iso200K",","," ","iso400K"}],"}"}],","," ","\n","  ",RowBox[
+{"PlotLegends"," ","\[Rule]"," ",RowBox[{"{",RowBox[{"\"10 K\"",","," ","\"200 K\"",","," ","\"400 K\""}],"}"}]}],","," ","\n","  ",RowBox[
+{"AxesLabel"," ","\[Rule]"," ",RowBox[{"{",RowBox[{"\"Number Density (mol/m^3)\"",","," ","\"Pressure (Pa)\""}],"}"}]}],","," ","\n","  ",RowBox[
+{"PlotLabel"," ","\[Rule]"," ","\"Argon Quasi-Isotherms (Class Data)\""}],","," ","\n","  ",RowBox[
+{"PlotMarkers"," ","\[Rule]"," ","Automatic"}],",","\n","  ",RowBox[{"ImageSize"," ","\[Rule]"," ","Large"}]}],"]"}],"]"}],";"}],RowBox[
+{"\n","\n"}],RowBox[{"Print","[",RowBox[{"Style","[",RowBox[{"\"\\n b) How do these quasi-isotherms compare with the experimental isotherms shown in Chapter 2 of McQuarrie\[CloseCurlyQuote]s Molecular Thermodynamics? (For example, compare to Figures 2.6 and 2.7; note that Tc of Ar is 150.95 K.) Discuss similarities and differences.\"",",","DarkBlue"}],"]"}],"]"}],"\n",RowBox[
+{"Print","[","\"At high temps such as 400K that are above Ar's critical temp. the curve is smooth and increases. This is also a key observation in the experimental isotherms. However, experimental isotherms look flat at the region that represents the gas to liquid phase transition. The simulation does not show this. \"","]"}],"\n",RowBox[
+{"Print","[",RowBox[{"Style","[",RowBox[{"\"\\n c) The article specifies that the MD simulations produce quasi-isotherms, not true isotherms. Based on the simulation results, why do you think that the article makes that point? (It might also help to look at the initial and final temperatures in the \[OpenCurlyDoubleQuote]FILENAME_output.txt\[CloseCurlyDoubleQuote] results file for a few simulations.)\"",",","DarkBlue"}],"]"}],"]"}],"\n",RowBox[
+{"Print","[","\"MD software simulates a constant Energy instead of constant Temperature. As the simulation runs, energy is both kinetic and potential. As PE changes (as particles get closer), measured temperature drifts. \"","]"}],"\n",RowBox[
+{"Print","[",RowBox[{"Style","[",RowBox[{"\"\\n d)Consider your isotherm. How does pressure change with changes in number density? Give a physical explanation for this change. Pick a few number densities and inspect the animated trajectories for the simulations. Do you observe qualitative differences in molecular behavior that might explain the differences in pressure?\"",",","DarkBlue"}],"]"}],"]"}],"\n",RowBox[
+{"Print","[","\"As the number density increases, pressure increases exponentially. Pressure is the average force by the particles that undergo collisions divided by total area. As we increase the number density,there are more moles of gas in the same volume. This increases the frequency of the collisions therefore affecting pressure. As I inspect the trajectories (for ex. 35,000 mol/m^3), the system appears very cluttered. The particles are impacting the boundaries. This is the opposite of the 1 mol/m^3 run. \"","]"}],"\n",RowBox[
+{"Print","[",RowBox[{"Style","[",RowBox[{"\"\\n e) Pick a number density and compare the pressure for the simulations at the different temperatures. How does pressure change with temperature? Give a physical explanation for this change. Do you observe qualitative differences in molecular behavior that might explain the differences in pressure?\"",",","DarkBlue"}],"]"}]," ","]"}],"\n",RowBox[
+{"Print","[","\"Upon fixing number density, increasing temperature also increases the pressure. Considering that temperature is proportional to the mean squared velocity, then, at higher temps particles must be traveling faster. Consequently, they also carry momentum and strike harder against the walls. Imparting a larger force over the same area results in a higher pressure. At 400k, particles move rapidly. At 10k they move much slower.\"","]"}],RowBox[
+{"\n","\n","\n"}],RowBox[{RowBox[{"Print","[",RowBox[{"\"\\n\"",","," ",RowBox[{"Style","[",RowBox[
+{"\"f) Pick one isotherm and use the ThermodynamicData function in Mathematica to calculate the molar density for each of the pressure values in that isotherm. Compare the experimental isotherm from Mathematica to the one obtained in your simulation. Discuss any differences. \"",",","DarkBlue"}],"]"}]}],"]"}],";"}],"\n",RowBox[
+{RowBox[{"Print","[","\"\"","]"}],";"}],RowBox[{"\n","\n"}],RowBox[{RowBox[{"theoComparison"," ","="," ",RowBox[
+{"Table","[","\n","  ",RowBox[{RowBox[{"Module","[",RowBox[{RowBox[{"{",RowBox[{RowBox[
+{"simP"," ","="," ",RowBox[{"pt","[",RowBox[{"[","2","]"}],"]"}]}],","," ",RowBox[
+{"simD"," ","="," ",RowBox[{"pt","[",RowBox[{"[","1","]"}],"]"}]}],","," ","theoD"}],"}"}],",","\n","    ",RowBox[
+{RowBox[{"theoD"," ","="," ",RowBox[{"Quiet","[",RowBox[{"QuantityMagnitude","[","\n","      ",RowBox[
+{"ThermodynamicData","[",RowBox[{"\"Argon\"",","," ","\"MolarDensity\"",","," ",RowBox[
+{"{",RowBox[{RowBox[{"\"Temperature\""," ","\[Rule]"," ",RowBox[{"Quantity","[",RowBox[
+{"400",","," ","\"Kelvins\""}],"]"}]}],","," ",RowBox[{"\"Pressure\""," ","\[Rule]"," ",RowBox[
+{"Quantity","[",RowBox[{"simP",","," ","\"Pascals\""}],"]"}]}]}],"}"}]}],"]"}],"\n","    ","]"}],"]"}]}],";","\n","    ",RowBox[
+{"{",RowBox[{"simP",","," ","simD",","," ","theoD"}],"}"}]}]}],"\n","  ","]"}],","," ","\n","  ",RowBox[
+{"{",RowBox[{"pt",","," ","iso400K"}],"}"}]}],"\n","]"}]}],";"}],RowBox[{"\n","\n"}],RowBox[
+{RowBox[{"Print","[",RowBox[{"Grid","[",RowBox[{RowBox[{"Prepend","[",RowBox[{"theoComparison",","," ",RowBox[
+{"{",RowBox[{"\"Simulated Pressure (Pa)\"",","," ","\"Simulated Density (mol/m^3)\"",","," ","\"NIST Theoretical Density (mol/m^3)\""}],"}"}]}],"]"}],","," ","\n","  ",RowBox[
+{"Frame"," ","\[Rule]"," ","All"}],","," ",RowBox[{"Background"," ","\[Rule]"," ",RowBox[
+{"{",RowBox[{"None",","," ",RowBox[{"{",RowBox[{"LightGray",","," ","None"}],"}"}]}],"}"}]}]}],"]"}],"]"}],";"}],"\n",RowBox[
+{"Print","[","\"\\n The simulated vs theoretical are very close. However at extreme values divergence is larger. This is probably because of the constraints of constant temperature vs energy\"","]"}],RowBox[
+{"\n","\n","\n"}],RowBox[{RowBox[{"Print","[",RowBox[{"\"\\n\"",","," ",RowBox[{"Style","[",RowBox[
+{"\"Question 4: Noble Gas Ranking by Intermolecular Attraction\"",","," ","20",","," ","Bold",","," ","DarkRed"}],"]"}]}],"]"}],";"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"Style","[",RowBox[{"\"a) Based on the compressibility, rank the gases in order of increasing intermolecular attraction. Discuss the type of intermolecular interactions observed in the noble gases. Does your computational ranking match the expected result?\"",",","DarkBlue"}],"]"}],"]"}],";"}],RowBox[
+{"\n","\n"}],RowBox[{RowBox[{"nobleData"," ","="," ",RowBox[{"Select","[",RowBox[
+{"cleanData",","," ",RowBox[{RowBox[{RowBox[{"MemberQ","[",RowBox[{RowBox[{"{",RowBox[
+{"\"He\"",","," ","\"Ne\"",","," ","\"Ar\"",","," ","\"Kr\"",","," ","\"Xe\""}],"}"}],","," ",RowBox[
+{"#","[",RowBox[{"[","1","]"}],"]"}]}],"]"}]," ","&&"," ",RowBox[{RowBox[{"#","[",RowBox[
+{"[","3","]"}],"]"}]," ","=="," ","50"}]}]," ","&"}]}],"]"}]}],";"}],"\n",RowBox[
+{RowBox[{"rankedNobles"," ","="," ",RowBox[{"SortBy","[",RowBox[{"nobleData",","," ",RowBox[
+{RowBox[{"#","[",RowBox[{"[","6","]"}],"]"}]," ","&"}]}],"]"}]}],";"}],"\n",RowBox[
+{"Print","[","\"He < Ne < Ar < Kr < Xe \\n This matches theoretical expectations because monoatomic noble gases interact only through London forces. Increasing the atomic radius makes it more polar annd leads to stronger attractive forces\"","]"}],"\n",RowBox[
+{RowBox[{"Print","[",RowBox[{"Grid","[",RowBox[{RowBox[{"Prepend","[",RowBox[{"rankedNobles",","," ","headers"}],"]"}],","," ",RowBox[
+{"Frame"," ","\[Rule]"," ","All"}],","," ",RowBox[{"Background"," ","\[Rule]"," ",RowBox[
+{"{",RowBox[{"None",","," ",RowBox[{"{",RowBox[{"LightGray",","," ","None"}],"}"}]}],"}"}]}]}],"]"}],"]"}],";"}],"\n",RowBox[
+{"Print","[",RowBox[{"Style","[",RowBox[{"\" b) Inspect the animated trajectories for the simulations. Do you observe qualitative evidence supporting the quantitative ranking based on the compressibility? If so, describe what you see.\"",","," ","DarkBlue"}],"]"}],"]"}],"\n",RowBox[
+{"Print","[","\"The simulation shows a lot of clusters at low compressibilities. At high compressibilities, there is a lot of separation.\"","]"}],"\n",RowBox[
+{RowBox[{"Print","[","\"\\n \"","]"}],"\n"}]}],"Input",CellLabel -> "In[1188]:= ",
+ExpressionUUID -> "35fd6c69-ee5e-4e85-af86-a42113464fd8"],Cell[
+BoxData[InterpretationBox[
+RowBox[{StyleBox["\"Question 1: Simulation Results\"",20,Bold,RGBColor[0.48`,0.06`,
+0.06`],StripOnInput -> False],"\[InvisibleSpace]","\"\\n\""}],SequenceForm[Style[
+"Question 1: Simulation Results",20,Bold,RGBColor[0.48`,0.06`,0.06`]],"\n"],Editable -> False],
+StandardForm],"Print",ExpressionUUID -> "8dd8846b-3ca7-4f9e-a12f-33f7771f3632"],Cell[
+BoxData[
+TagBox[GridBox[{{"\"Gas\"","\"Density (mol/m^3)\"","\"Init Temp (K)\"","\"Avg Temp (K)\"","\"Pressure (Pa)\"","\"Compressibility (Z)\""},{"\"Ar\"","100","300","299.73315`","249413.2819`","1.00081`"},{"\"Ar\"","100","400","399.52763`","329635.1744`","0.99232`"},{"\"Ar\"","100","600","598.12992`","491093.3177`","0.98749`"},{"\"Ar\"","300","800","799.17`","1.99819765`*^6","1.00241`"},{"\"Ar\"","100","10","10.86101`","8237.99844`","0.91226`"},{"\"Ar\"","100","800","797.29629`","663427.641`","1.00078`"},{"\"Ar\"","200","500","500.13496`","828151.832`","0.99577`"},{"\"Ar\"","35000","1000","770.17713`","5.736487167`*^8","2.55949`"},{"\"Ar\"","800","800","803.0523`","5.435974226`*^6","1.01768`"},{"\"Ar\"","50","1000","995.84281`","413204.2495`","0.99809`"},{"\"Ar\"","10","2000","1990.88076`","164448.3417`","0.99346`"},{"\"Ar\"","1000","100","118.32278`","850843.2597`","0.86486`"},{"\"Ar\"","1000","50","73.86727`","450460.5859`","0.73345`"},{"\"Ar\"","1000","1000","1003.03386`","8.501655593`*^6","1.01942`"},{"\"Ar\"","20000","10","123.52828`","7.944447512`*^6","0.38675`"},{"\"Ar\"","3000","300","327.32233`","7.938251475`*^6","0.97229`"},{"\"Ar\"","2000","150","175.65207`","2.56958318`*^6","0.87972`"},{"\"Ar\"","9000","150","218.37927`","1.243659791`*^7","0.76105`"},{"\"Ar\"","7000","150","213.43099`","9.537891561`*^6","0.76783`"},{"\"Ar\"","1","400","398.17094`","3230.83343`","0.97591`"},{"\"Ar\"","5000","400","432.97126`","1.848047127`*^7","1.02672`"},{"\"Ar\"","10000","400","434.02314`","3.960431984`*^7","1.09748`"},{"\"Ar\"","15000","400","407.83261`","6.20966638`*^7","1.22085`"},{"\"Ar\"","20000","400","365.7921`","8.315383374`*^7","1.36705`"},{"\"Ar\"","25000","400","324.9539`","105198567","1.55745`"},{"\"Ar\"","30000","400","292.98637`","1.323221075`*^8","1.81063`"},{"\"Ar\"","35000","400","291.3088`","1.919400833`*^8","2.26418`"},{"\"He\"","20000","10","15.74604`","229799806230","0.709`"},{"\"Ne\"","20000","10","45.44128`","3.104845649`*^6","0.41089`"},{"\"Ar\"","20000","10","123.52828`","7.944447512`*^6","0.38675`"},{"\"Kr\"","20000","10","142.61667`","9.750857883`*^6","0.41116`"},{"\"Xe\"","20000","10","123.57026`","7.859457255`*^6","0.38249`"},{"\"He\"","1000","50","50.12483`","418029.1689`","1.00304`"},{"\"Ne\"","1000","50","52.03675`","417758.1591`","0.96556`"},{"\"Ar\"","1000","50","73.86727`","1.856451998`*^6","0.73345`"},{"\"Kr\"","1000","50","113.30074`","587173.9624`","0.6233`"},{"\"Xe\"","1000","50","160.89498`","710323.9289`","0.53098`"}},
+AutoDelete -> False,GridBoxBackground -> {"Columns" -> {{None}},"Rows" -> {GrayLevel[
+0.85`],None}},GridBoxFrame -> {"Columns" -> {{True}},"Rows" -> {{True}}},GridBoxItemSize -> {"Columns" -> {{Automatic}},"Rows" -> {{Automatic}}}],
+"Grid"],StandardForm],"Print",ExpressionUUID -> "3a2d7029-33bb-4e08-b74e-1bcaee34d006"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"\\n\"","\[InvisibleSpace]",StyleBox["\"Question 2: Discuss the conditions under which you saw significant negative and positive deviations\\nfrom the ideal gas compressibility for Ar.\"",
+20,Bold,RGBColor[0.48`,0.06`,0.06`],StripOnInput -> False],"\[InvisibleSpace]","\"\\n\""}],
+SequenceForm["\n",Style["Question 2: Discuss the conditions under which you saw significant negative and positive deviations\nfrom the ideal gas compressibility for Ar.",
+20,Bold,RGBColor[0.48`,0.06`,0.06`]],"\n"],Editable -> False],StandardForm],"Print",
+ExpressionUUID -> "02119cac-6f98-4d45-937a-ac8ee4cfb39f"],Cell[
+BoxData[InterpretationBox[
+RowBox[{StyleBox["\"a) Under what conditions is ideal behavior expected? Do these results match your expectations for conditions under which deviations from ideality should occur?\"",
+12,Bold,RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],"\[InvisibleSpace]","\"\\n\""}],
+SequenceForm[Style["a) Under what conditions is ideal behavior expected? Do these results match your expectations for conditions under which deviations from ideality should occur?",
+12,Bold,RGBColor[0.07`,0.25`,0.6`]],"\n"],Editable -> False],StandardForm],"Print",
+ExpressionUUID -> "0f651f9c-9b94-41c9-8d88-3203798cf692"],Cell[
+BoxData[InterpretationBox[
+RowBox[{"\"Ideal behavior is expected at low densities where Z is approximately 1. These results match our expectations because we observed that as density increases, Z decreases\"","\[InvisibleSpace]","\"\\n\""}],
+SequenceForm["Ideal behavior is expected at low densities where Z is approximately 1. These results match our expectations because we observed that as density increases, Z decreases",
+"\n"],Editable -> False],StandardForm],"Print",ExpressionUUID -> "13fd1ed9-55b0-4836-b60f-31151a56c0fd"],Cell[
+BoxData[
+InterpretationBox[RowBox[{StyleBox["\"b)\[NonBreakingSpace]Inspect the animated trajectories for the simulations. Do you observe qualitative evidence supporting the quantitative deviations in compressibility? (Hint: It might help to show representative frames from the simulations here and in response to other questions.)\"",
+12,Bold,RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],"\[InvisibleSpace]","\"\\n\""}],
+SequenceForm[Style["b)\[NonBreakingSpace]Inspect the animated trajectories for the simulations. Do you observe qualitative evidence supporting the quantitative deviations in compressibility? (Hint: It might help to show representative frames from the simulations here and in response to other questions.)",
+12,Bold,RGBColor[0.07`,0.25`,0.6`]],"\n"],Editable -> False],StandardForm],"Print",
+ExpressionUUID -> "ed2225c0-8cbd-46d4-bcd1-ba660fcba139"],Cell[
+BoxData[InterpretationBox[
+RowBox[{"\"Most Ideal Behavior observed: \"","\[InvisibleSpace]",RowBox[{"{",RowBox[
+{"\"Ar\"",",","100",",","800",",","797.29629`",",","663427.641`",",","1.00078`"}],"}"}]}],
+SequenceForm["Most Ideal Behavior observed: ",{"Ar",100,800,797.29629`,663427.641`,1.00078`}],
+Editable -> False],StandardForm],"Print",ExpressionUUID -> "7e2a3a01-22f5-4b8c-8499-ec1db354aacf"],Cell[
+BoxData[
+"\"\\nSignificant negative deviations (Z < 1) occur when attractive forces dominate.\"",
+StandardForm],"Print",ExpressionUUID -> "cc9ea4d6-e9ce-4d2d-9bb0-acab57400bb9"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"Most Negative Deviation observed: \"","\[InvisibleSpace]",RowBox[
+{"{",RowBox[{"\"Ar\"",",","20000",",","10",",","123.52828`",",","7.944447512`*^6",",","0.38675`"}],"}"}]}],
+SequenceForm["Most Negative Deviation observed: ",{"Ar",20000,10,123.52828`,7944447.512`,0.38675`}],
+Editable -> False],StandardForm],"Print",ExpressionUUID -> "9b4e5a1e-8a54-441f-8966-552702b5f2e1"],Cell[
+BoxData[
+"\"\\nSignificant positive deviations (Z > 1) occur when repulsive forces dominate at high densities.\"",
+StandardForm],"Print",ExpressionUUID -> "1d102b07-6305-4170-9e4a-0851abc97bc2"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"Most Positive Deviation observed: \"","\[InvisibleSpace]",RowBox[
+{"{",RowBox[{"\"Ar\"",",","35000",",","1000",",","770.17713`",",","5.736487167`*^8",",","2.55949`"}],"}"}]}],
+SequenceForm["Most Positive Deviation observed: ",{"Ar",35000,1000,770.17713`,5.736487167`*^8,2.55949`}],
+Editable -> False],StandardForm],"Print",ExpressionUUID -> "f16506a8-abe9-4c73-8651-8c2e2d4f2a2f"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"\\n\"","\[InvisibleSpace]",StyleBox["\"Question 3: Quasi-Isotherms\"",
+20,Bold,RGBColor[0.48`,0.06`,0.06`],StripOnInput -> False]}],SequenceForm["\n",Style[
+"Question 3: Quasi-Isotherms",20,Bold,RGBColor[0.48`,0.06`,0.06`]]],Editable -> False],
+StandardForm],"Print",ExpressionUUID -> "d2b7c97f-76b1-4b72-960c-f323f564c5d7"],Cell[
+BoxData[
+TemplateBox[{GraphicsBox[{{},{{{},{},TagBox[{Hue[0.67`,0.6`,0.6`],Directive[PointSize[
+NCache[Rational[7,360],0.019444444444444445`]],RGBColor[0.24`,0.6`,0.8`],AbsoluteThickness[
+2]],LineBox[{{1.`,77.76637`},{5000.`,1961577.`},{10000.`,4732375.04`},{15000.`,6454103.5`},{20000.`,7713170.45`},{25000.`,8598367.71`},{30000.`,1.08396823`*^7},{35000.`,1.78980581`*^7}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#1"]]],TagBox[{Hue[0.9060679774997897`,
+0.6`,0.6`],Directive[PointSize[NCache[Rational[7,360],0.019444444444444445`]],RGBColor[
+0.95`,0.627`,0.1425`],AbsoluteThickness[2]],LineBox[{{1.`,1593.69`},{5000.`,9099742.89`},{10000.`,1.90192353`*^7},{15000.`,2.77227179`*^7},{20000.`,3.34854622`*^7},{25000.`,3.79709884`*^7},{30000.`,4.89026385`*^7},{35000.`,7.45929533`*^7}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#2"]]],TagBox[{Hue[0.1421359549995791`,
+0.6`,0.6`],Directive[PointSize[NCache[Rational[7,360],0.019444444444444445`]],RGBColor[
+0.455`,0.7`,0.21`],AbsoluteThickness[2]],LineBox[{{1.`,3230.8334`},{5000.`,1.8480471`*^7},{10000.`,3.960432`*^7},{15000.`,6.2096664`*^7},{20000.`,8.3153834`*^7},{25000.`,1.05198567`*^8},{30000.`,1.32322108`*^8},{35000.`,1.91940083`*^8}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#3"]]]},{TagBox[{Directive[PointSize[
+NCache[Rational[7,360],0.019444444444444445`]],RGBColor[0.24`,0.6`,0.8`],AbsoluteThickness[
+2]],GeometricTransformationBox[InsetBox[BoxData[FormBox[StyleBox[GraphicsBox[{EdgeForm[],DiskBox[
+{0,0}]},PlotRangePadding -> Scaled[0.15`]],GraphicsBoxOptions -> {DefaultBaseStyle -> Directive[
+PointSize[Rational[7,360]],RGBColor[0.24`,0.6`,0.8`],AbsoluteThickness[2]]},StripOnInput -> False],
+TraditionalForm]],{0.`,0.`},Automatic,Offset[10.976`]],{{{1.`,77.76637`}},{{5000.`,1961577.`}},{{10000.`,4732375.04`}},{{15000.`,6454103.5`}},{{20000.`,7713170.45`}},{{25000.`,8598367.71`}},{{30000.`,1.08396823`*^7}},{{35000.`,1.78980581`*^7}}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#1"]]],TagBox[{Directive[PointSize[
+NCache[Rational[7,360],0.019444444444444445`]],RGBColor[0.95`,0.627`,0.1425`],AbsoluteThickness[
+2]],GeometricTransformationBox[InsetBox[BoxData[FormBox[StyleBox[GraphicsBox[{EdgeForm[],PolygonBox[
+{{-1,-1},{1,-1},{1,1},{-1,1}}]},PlotRangePadding -> Scaled[0.15`]],GraphicsBoxOptions -> {DefaultBaseStyle -> Directive[
+PointSize[Rational[7,360]],RGBColor[0.95`,0.627`,0.1425`],AbsoluteThickness[2]]},
+StripOnInput -> False],TraditionalForm]],{0.`,0.`},Automatic,Offset[10.5`]],{{{1.`,1593.69`}},{{5000.`,9099742.89`}},{{10000.`,1.90192353`*^7}},{{15000.`,2.77227179`*^7}},{{20000.`,3.34854622`*^7}},{{25000.`,3.79709884`*^7}},{{30000.`,4.89026385`*^7}},{{35000.`,7.45929533`*^7}}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#2"]]],TagBox[{Directive[PointSize[
+NCache[Rational[7,360],0.019444444444444445`]],RGBColor[0.455`,0.7`,0.21`],AbsoluteThickness[
+2]],GeometricTransformationBox[InsetBox[BoxData[FormBox[StyleBox[GraphicsBox[{EdgeForm[],PolygonBox[
+{{0,1},{1,0},{0,-1},{-1,0}}]}],GraphicsBoxOptions -> {DefaultBaseStyle -> Directive[
+PointSize[Rational[7,360]],RGBColor[0.455`,0.7`,0.21`],AbsoluteThickness[2]]},StripOnInput -> False],
+TraditionalForm]],{0.`,0.`},Automatic,Offset[10.2`]],{{{1.`,3230.8334`}},{{5000.`,1.8480471`*^7}},{{10000.`,3.960432`*^7}},{{15000.`,6.2096664`*^7}},{{20000.`,8.3153834`*^7}},{{25000.`,1.05198567`*^8}},{{30000.`,1.32322108`*^8}},{{35000.`,1.91940083`*^8}}}]},
+Function[Annotation[Slot[1],"Charting`Private`Tag#3"]]]}},{{},{}}},{DisplayFunction -> Identity,DisplayFunction -> Identity,RuleDelayed[
+PlotInteractivity,True],DefaultBaseStyle -> {"PlotGraphics","Graphics"},AspectRatio -> NCache[
+Power[GoldenRatio,-1],0.6180339887498948`],Axes -> {True,True},AxesLabel -> {FormBox[
+TagBox["\"Number Density (mol/m^3)\"",HoldForm],TraditionalForm],FormBox[TagBox["\"Pressure (Pa)\"",
+HoldForm],TraditionalForm]},AxesOrigin -> {0,0},RuleDelayed[DisplayFunction,Identity],Frame -> {{False,False},{False,False}},FrameLabel -> {{None,None},{None,None}},FrameTicks -> {{Automatic,Automatic},{Automatic,Automatic}},GridLines -> {None,None},GridLinesStyle -> Directive[
+GrayLevel[0.5`,0.4`]],ImageSize -> Large,Method -> {"AxisPadding" -> Scaled[0.02`],"DefaultBoundaryStyle" -> Automatic,"DefaultGraphicsInteraction" -> {"Version" -> 1.2`,"TrackMousePosition" -> {True,False},"Effects" -> {"Highlight" -> {"ratio" -> 2},"HighlightPoint" -> {"ratio" -> 2},"Droplines" -> {"freeformCursorMode" -> True,"placement" -> {"x" -> "All","y" -> "None"}}}},"DefaultMeshStyle" -> AbsolutePointSize[
+6],"DefaultPlotStyle" -> {Directive[RGBColor[0.24`,0.6`,0.8`],AbsoluteThickness[2]],Directive[
+RGBColor[0.95`,0.627`,0.1425`],AbsoluteThickness[2]],Directive[RGBColor[0.455`,0.7`,
+0.21`],AbsoluteThickness[2]],Directive[RGBColor[0.922526`,0.385626`,0.209179`],AbsoluteThickness[
+2]],Directive[RGBColor[0.578`,0.51`,0.85`],AbsoluteThickness[2]],Directive[RGBColor[
+0.772079`,0.431554`,0.102387`],AbsoluteThickness[2]],Directive[RGBColor[0.4`,0.64`,
+1.`],AbsoluteThickness[2]],Directive[RGBColor[1.`,0.75`,0.`],AbsoluteThickness[2]],Directive[
+RGBColor[0.8`,0.4`,0.76`],AbsoluteThickness[2]],Directive[RGBColor[0.637`,0.65`,0.`],
+AbsoluteThickness[2]],Directive[RGBColor[0.915`,0.3325`,0.2125`],AbsoluteThickness[
+2]],Directive[RGBColor[0.40082222609352647`,0.5220066643438841`,0.85`],AbsoluteThickness[
+2]],Directive[RGBColor[0.9728288904374106`,0.621644452187053`,0.07336199581899142`],
+AbsoluteThickness[2]],Directive[RGBColor[0.736782672705901`,0.358`,0.5030266573755369`],
+AbsoluteThickness[2]],Directive[RGBColor[0.28026441037696703`,0.715`,0.4292089322474965`],
+AbsoluteThickness[2]]},"DomainPadding" -> Scaled[0.02`],"RangePadding" -> Scaled[
+0.05`],"OptimizePlotMarkers" -> True,"IncludeHighlighting" -> Automatic,"HighlightStyle" -> Automatic,"OptimizePlotMarkers" -> True,"IncludeHighlighting" -> "CurrentSet","HighlightStyle" -> Automatic,"OptimizePlotMarkers" -> True,"CoordinatesToolOptions" -> {"DisplayFunction" -> Function[
+{Function[Identity[Slot[1]]][Part[Slot[1],1]],Function[Identity[Slot[1]]][Part[Slot[
+1],2]]}],"CopiedValueFunction" -> Function[{Function[Identity[Slot[1]]][Part[Slot[
+1],1]],Function[Identity[Slot[1]]][Part[Slot[1],2]]}]}},RuleDelayed[PlotInteractivity,
+True],PlotLabel -> FormBox["\"Argon Quasi-Isotherms (Class Data)\"",TraditionalForm],PlotRange -> {{0,35000.`},{0,1.91940083`*^8}},PlotRangeClipping -> True,PlotRangePadding -> {{Scaled[
+0.02`],Scaled[0.02`]},{Scaled[0.02`],Scaled[0.05`]}},Ticks -> {Automatic,Automatic},RuleDelayed[
+PlotInteractivity,True]},ExpressionUUID -> "36198e0f-b041-4f08-807f-a730f243446b"],FormBox[
+FormBox[TemplateBox[{"\"10 K\"","\"200 K\"","\"400 K\""},"LineLegend",DisplayFunction -> Function[
+FormBox[StyleBox[StyleBox[PaneBox[TagBox[GridBox[{{TagBox[GridBox[{{GraphicsBox[{{Directive[
+EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.24`,0.6`,
+0.8`],AbsoluteThickness[2]],{LineBox[{{0,12.5`},{20,12.5`}}]}},{Directive[EdgeForm[
+Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.24`,0.6`,0.8`],
+AbsoluteThickness[2]],{InsetBox[GraphicsBox[{EdgeForm[],DiskBox[{0,0}]},{DefaultBaseStyle -> {"Graphics",{AbsolutePointSize[
+6]},Directive[EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[
+0.24`,0.6`,0.8`],AbsoluteThickness[2]]},PlotRangePadding -> Scaled[0.15`]}],NCache[
+Scaled[{Rational[1,2],Rational[1,2]}],Scaled[{0.5`,0.5`}]],Automatic,Scaled[1]]}}},
+AspectRatio -> Full,ImageSize -> {20,12.5`},PlotRangePadding -> None,ImagePadding -> Automatic,
+BaselinePosition -> (Scaled[0.18000000000000002`] -> Baseline)],Slot[1]},{GraphicsBox[
+{{Directive[EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[
+0.95`,0.627`,0.1425`],AbsoluteThickness[2]],{LineBox[{{0,12.5`},{20,12.5`}}]}},{Directive[
+EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.95`,0.627`,
+0.1425`],AbsoluteThickness[2]],{InsetBox[GraphicsBox[{EdgeForm[],PolygonBox[{{-1,-1},{1,-1},{1,1},{-1,1}}]},
+{DefaultBaseStyle -> {"Graphics",{AbsolutePointSize[6]},Directive[EdgeForm[Directive[
+Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.95`,0.627`,0.1425`],AbsoluteThickness[
+2]]},PlotRangePadding -> Scaled[0.15`]}],NCache[Scaled[{Rational[1,2],Rational[1,
+2]}],Scaled[{0.5`,0.5`}]],Automatic,Scaled[1]]}}},AspectRatio -> Full,ImageSize -> {20,12.5`},
+PlotRangePadding -> None,ImagePadding -> Automatic,BaselinePosition -> (Scaled[0.18000000000000002`] -> Baseline)],Slot[
+2]},{GraphicsBox[{{Directive[EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[
+0.5`],RGBColor[0.455`,0.7`,0.21`],AbsoluteThickness[2]],{LineBox[{{0,12.5`},{20,12.5`}}]}},{Directive[
+EdgeForm[Directive[Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.455`,0.7`,
+0.21`],AbsoluteThickness[2]],{InsetBox[GraphicsBox[{EdgeForm[],PolygonBox[{{0,1},{1,0},{0,-1},{-1,0}}]},
+{DefaultBaseStyle -> {"Graphics",{AbsolutePointSize[6]},Directive[EdgeForm[Directive[
+Opacity[0.3`],GrayLevel[0]]],PointSize[0.5`],RGBColor[0.455`,0.7`,0.21`],AbsoluteThickness[
+2]]}}],NCache[Scaled[{Rational[1,2],Rational[1,2]}],Scaled[{0.5`,0.5`}]],Automatic,
+Scaled[1]]}}},AspectRatio -> Full,ImageSize -> {20,12.5`},PlotRangePadding -> None,
+ImagePadding -> Automatic,BaselinePosition -> (Scaled[0.18000000000000002`] -> Baseline)],Slot[
+3]}},GridBoxAlignment -> {"Columns" -> {Center,Left},"Rows" -> {{Baseline}}},AutoDelete -> False,
+GridBoxDividers -> {"Columns" -> {{False}},"Rows" -> {{False}}},GridBoxItemSize -> {"Columns" -> {{All}},"Rows" -> {{All}}},
+GridBoxSpacings -> {"Columns" -> {{0.5`}},"Rows" -> {{0.8`}}}],"Grid"]}},GridBoxAlignment -> {"Columns" -> {{Left}},"Rows" -> {{Top}}},
+AutoDelete -> False,GridBoxItemSize -> {"Columns" -> {{Automatic}},"Rows" -> {{Automatic}}},
+GridBoxSpacings -> {"Columns" -> {{1}},"Rows" -> {{0}}}],"Grid"],Alignment -> Left,
+AppearanceElements -> None,ImageMargins -> {{5,5},{5,5}},ImageSizeAction -> "ResizeToFit"],
+LineIndent -> 0,StripOnInput -> False],{FontFamily -> "Arial"},Background -> Automatic,
+StripOnInput -> False],TraditionalForm]],RuleDelayed[InterpretationFunction,Function[
+RowBox[{"LineLegend","[",RowBox[{RowBox[{"{",RowBox[{RowBox[{"Directive","[",RowBox[
+{RowBox[{"PointSize","[",FractionBox["7","360"],"]"}],",",TemplateBox[Association[
+"color" -> RGBColor[0.24`,0.6`,0.8`]],"RGBColorSwatchTemplate"],",",RowBox[{"AbsoluteThickness","[","2","]"}]}],"]"}],",",RowBox[
+{"Directive","[",RowBox[{RowBox[{"PointSize","[",FractionBox["7","360"],"]"}],",",TemplateBox[
+Association["color" -> RGBColor[0.95`,0.627`,0.1425`]],"RGBColorSwatchTemplate"],",",RowBox[
+{"AbsoluteThickness","[","2","]"}]}],"]"}],",",RowBox[{"Directive","[",RowBox[{RowBox[
+{"PointSize","[",FractionBox["7","360"],"]"}],",",TemplateBox[Association["color" -> RGBColor[
+0.455`,0.7`,0.21`]],"RGBColorSwatchTemplate"],",",RowBox[{"AbsoluteThickness","[","2","]"}]}],"]"}]}],"}"}],",",RowBox[
+{"{",RowBox[{Slot[1],",",Slot[2],",",Slot[3]}],"}"}],",",RowBox[{"LegendMarkers","\[Rule]",RowBox[
+{"{",RowBox[{RowBox[{"{",RowBox[{GraphicsBox[{EdgeForm[],DiskBox[{0,0}]},PlotRangePadding -> Scaled[
+0.15`]],",",RowBox[{"Offset","[","10.976`","]"}]}],"}"}],",",RowBox[{"{",RowBox[{GraphicsBox[
+{EdgeForm[],PolygonBox[{{-1,-1},{1,-1},{1,1},{-1,1}}]},PlotRangePadding -> Scaled[
+0.15`]],",",RowBox[{"Offset","[","10.5`","]"}]}],"}"}],",",RowBox[{"{",RowBox[{GraphicsBox[
+{EdgeForm[],PolygonBox[{{0,1},{1,0},{0,-1},{-1,0}}]}],",",RowBox[{"Offset","[","10.2`","]"}]}],"}"}]}],"}"}]}],",",RowBox[
+{"Joined","\[Rule]",RowBox[{"{",RowBox[{"True",",","True",",","True"}],"}"}]}],",",RowBox[
+{"LabelStyle","\[Rule]",RowBox[{"{","}"}]}],",",RowBox[{"LegendLayout","\[Rule]","\"Column\""}]}],"]"}]]],
+Editable -> True],TraditionalForm],TraditionalForm]},"Legended",DisplayFunction -> Function[
+GridBox[{{TagBox[ItemBox[PaneBox[TagBox[Slot[1],"SkipImageSizeLevel"],Alignment -> {Center,Baseline},
+BaselinePosition -> Baseline],DefaultBaseStyle -> "Labeled"],"SkipImageSizeLevel"],ItemBox[
+Slot[2],DefaultBaseStyle -> "LabeledLabel"]}},GridBoxAlignment -> {"Columns" -> {{Center}},"Rows" -> {{Center}}},
+AutoDelete -> False,GridBoxItemSize -> Automatic,BaselinePosition -> {1,1}]],InterpretationFunction -> Function[
+RowBox[{"Legended","[",RowBox[{Slot[1],",",RowBox[{"Placed","[",RowBox[{Slot[2],",","After"}],"]"}]}],"]"}]],
+Editable -> True],StandardForm],"Print",ExpressionUUID -> "41350319-fd58-45cc-bbe9-18f462400084"],Cell[
+BoxData[
+StyleBox["\"\\n b) How do these quasi-isotherms compare with the experimental isotherms shown in Chapter 2 of McQuarrie\[CloseCurlyQuote]s Molecular Thermodynamics? (For example, compare to Figures 2.6 and 2.7; note that Tc of Ar is 150.95 K.) Discuss similarities and differences.\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "4cf925f1-aabf-4507-ad38-21c74012690c"],Cell[
+BoxData[
+"\"At high temps such as 400K that are above Ar's critical temp. the curve is smooth and increases. This is also a key observation in the experimental isotherms. However, experimental isotherms look flat at the region that represents the gas to liquid phase transition. The simulation does not show this. \"",
+StandardForm],"Print",ExpressionUUID -> "fa47266e-ad46-4822-b89d-36edf1442bba"],Cell[
+BoxData[
+StyleBox["\"\\n c) The article specifies that the MD simulations produce quasi-isotherms, not true isotherms. Based on the simulation results, why do you think that the article makes that point? (It might also help to look at the initial and final temperatures in the \[OpenCurlyDoubleQuote]FILENAME_output.txt\[CloseCurlyDoubleQuote] results file for a few simulations.)\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "170bfb4b-b80c-4d5d-8a6b-49330813050e"],Cell[
+BoxData[
+"\"MD software simulates a constant Energy instead of constant Temperature. As the simulation runs, energy is both kinetic and potential. As PE changes (as particles get closer), measured temperature drifts. \"",
+StandardForm],"Print",ExpressionUUID -> "af48c00e-4dcb-41eb-84c6-fa6fcf941604"],Cell[
+BoxData[
+StyleBox["\"\\n d)Consider your isotherm. How does pressure change with changes in number density? Give a physical explanation for this change. Pick a few number densities and inspect the animated trajectories for the simulations. Do you observe qualitative differences in molecular behavior that might explain the differences in pressure?\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "1f7788c5-dd7c-4309-bbdf-528ae7d6d3d1"],Cell[
+BoxData[
+"\"As the number density increases, pressure increases exponentially. Pressure is the average force by the particles that undergo collisions divided by total area. As we increase the number density,there are more moles of gas in the same volume. This increases the frequency of the collisions therefore affecting pressure. As I inspect the trajectories (for ex. 35,000 mol/m^3), the system appears very cluttered. The particles are impacting the boundaries. This is the opposite of the 1 mol/m^3 run. \"",
+StandardForm],"Print",ExpressionUUID -> "bd755a85-aa44-4222-a1c2-e760ae594779"],Cell[
+BoxData[
+StyleBox["\"\\n e) Pick a number density and compare the pressure for the simulations at the different temperatures. How does pressure change with temperature? Give a physical explanation for this change. Do you observe qualitative differences in molecular behavior that might explain the differences in pressure?\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "bafb21e0-69ef-4595-b35d-9788d900d549"],Cell[
+BoxData[
+"\"Upon fixing number density, increasing temperature also increases the pressure. Considering that temperature is proportional to the mean squared velocity, then, at higher temps particles must be traveling faster. Consequently, they also carry momentum and strike harder against the walls. Imparting a larger force over the same area results in a higher pressure. At 400k, particles move rapidly. At 10k they move much slower.\"",
+StandardForm],"Print",ExpressionUUID -> "1291014b-f861-43d1-abfb-b0d787d2a0ae"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"\\n\"","\[InvisibleSpace]",StyleBox["\"f) Pick one isotherm and use the ThermodynamicData function in Mathematica to calculate the molar density for each of the pressure values in that isotherm. Compare the experimental isotherm from Mathematica to the one obtained in your simulation. Discuss any differences. \"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False]}],SequenceForm["\n",Style["f) Pick one isotherm and use the ThermodynamicData function in Mathematica to calculate the molar density for each of the pressure values in that isotherm. Compare the experimental isotherm from Mathematica to the one obtained in your simulation. Discuss any differences. ",
+RGBColor[0.07`,0.25`,0.6`]]],Editable -> False],StandardForm],"Print",ExpressionUUID -> "85043bef-1122-452a-bdd1-e0639962a4b4"],Cell[
+BoxData[
+"\"\"",StandardForm],"Print",ExpressionUUID -> "aebb77f7-1567-4e60-8d3d-cfdcc2c19205"],Cell[
+BoxData[
+TagBox[GridBox[{{"\"Simulated Pressure (Pa)\"","\"Simulated Density (mol/m^3)\"","\"NIST Theoretical Density (mol/m^3)\""},{"3230.8334`","1","0.9714451185208675`"},{"18480471","5000","5427.698707735416`"},{"39604320","10000","10691.050996874377`"},{"62096664","15000","14891.614324274973`"},{"83153834","20000","17830.24068908611`"},{"105198567","25000","20226.07484247729`"},{"132322108","30000","22551.478783800292`"},{"191940083","35000","26266.516223678227`"}},
+AutoDelete -> False,GridBoxBackground -> {"Columns" -> {{None}},"Rows" -> {GrayLevel[
+0.85`],None}},GridBoxFrame -> {"Columns" -> {{True}},"Rows" -> {{True}}},GridBoxItemSize -> {"Columns" -> {{Automatic}},"Rows" -> {{Automatic}}}],
+"Grid"],StandardForm],"Print",ExpressionUUID -> "bd7766ae-bd1c-4d25-816d-63df5075f49b"],Cell[
+BoxData[
+"\"\\n The simulated vs theoretical are very close. However at extreme values divergence is larger. This is probably because of the constraints of constant temperature vs energy\"",
+StandardForm],"Print",ExpressionUUID -> "1f8e229c-899c-4be1-983e-7b47b0312cc3"],Cell[
+BoxData[
+InterpretationBox[RowBox[{"\"\\n\"","\[InvisibleSpace]",StyleBox["\"Question 4: Noble Gas Ranking by Intermolecular Attraction\"",
+20,Bold,RGBColor[0.48`,0.06`,0.06`],StripOnInput -> False]}],SequenceForm["\n",Style[
+"Question 4: Noble Gas Ranking by Intermolecular Attraction",20,Bold,RGBColor[0.48`,
+0.06`,0.06`]]],Editable -> False],StandardForm],"Print",ExpressionUUID -> "48c583df-4bdd-464f-8ab8-a4ecf7f8dd26"],Cell[
+BoxData[
+StyleBox["\"a) Based on the compressibility, rank the gases in order of increasing intermolecular attraction. Discuss the type of intermolecular interactions observed in the noble gases. Does your computational ranking match the expected result?\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "7a22113c-a1f6-4233-b4a1-d9ea37ab6e66"],Cell[
+BoxData[
+"\"He < Ne < Ar < Kr < Xe \\n This matches theoretical expectations because monoatomic noble gases interact only through London forces. Increasing the atomic radius makes it more polar annd leads to stronger attractive forces\"",
+StandardForm],"Print",ExpressionUUID -> "389e5baf-24ca-4943-b013-3ec155f551d1"],Cell[
+BoxData[
+TagBox[GridBox[{{"\"Gas\"","\"Density (mol/m^3)\"","\"Init Temp (K)\"","\"Avg Temp (K)\"","\"Pressure (Pa)\"","\"Compressibility (Z)\""},{"\"Xe\"","1000","50","160.89498`","710323.9289`","0.53098`"},{"\"Kr\"","1000","50","113.30074`","587173.9624`","0.6233`"},{"\"Ar\"","1000","50","73.86727`","450460.5859`","0.73345`"},{"\"Ar\"","1000","50","73.86727`","1.856451998`*^6","0.73345`"},{"\"Ne\"","1000","50","52.03675`","417758.1591`","0.96556`"},{"\"He\"","1000","50","50.12483`","418029.1689`","1.00304`"}},
+AutoDelete -> False,GridBoxBackground -> {"Columns" -> {{None}},"Rows" -> {GrayLevel[
+0.85`],None}},GridBoxFrame -> {"Columns" -> {{True}},"Rows" -> {{True}}},GridBoxItemSize -> {"Columns" -> {{Automatic}},"Rows" -> {{Automatic}}}],
+"Grid"],StandardForm],"Print",ExpressionUUID -> "44885f4f-7d53-4001-9c16-e68df5f65bf3"],Cell[
+BoxData[
+StyleBox["\" b) Inspect the animated trajectories for the simulations. Do you observe qualitative evidence supporting the quantitative ranking based on the compressibility? If so, describe what you see.\"",
+RGBColor[0.07`,0.25`,0.6`],StripOnInput -> False],StandardForm],"Print",ExpressionUUID -> "92b85ec2-8726-4699-802c-af0a59c04716"],Cell[
+BoxData[
+"\"The simulation shows a lot of clusters at low compressibilities. At high compressibilities, there is a lot of separation.\"",
+StandardForm],"Print",ExpressionUUID -> "47aca3a5-4085-4975-aa49-1912d4668c6b"],Cell[
+BoxData[
+"\"\\n \"",StandardForm],"Print",ExpressionUUID -> "1818146c-f190-4932-80d6-c9152bba5170"]},
+Open],ExpressionUUID -> "7ed36092-57be-4ae0-91f2-5b1868e8a99c"]},StyleDefinitions -> "Default.nb",
+FrontEndVersion -> "14.3 for Wolfram Cloud 1.75 (December 9, 2025)"]
