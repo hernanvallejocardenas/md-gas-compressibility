@@ -20,7 +20,7 @@ The plots use quasi-isotherms at nominal 10, 200, and 400 K. A quasi-isotherm is
 
 ## Reproduce it
 
-Open `md-gas-compressibility.nb` in Mathematica and evaluate it from the first cell to the last. It loads the simulation output from Wolfram Cloud, so a connection is needed.
+Open `md-gas-compressibility.nb` in Mathematica and evaluate it from the first cell to the last. It loads the simulation output from the `data/` folder in this repo, so no internet connection is needed.
 
 Running it produces the same Z tables, the same quasi-isotherm plots at 10, 200, and 400 K, and the same 400 K NIST comparison.
 
@@ -36,5 +36,6 @@ Sample output (argon):
 
 - `md-gas-compressibility.nb` — the analysis notebook
 - `README.md` — this file
+- `data/md-simulation-data.csv` — the simulation output the notebook loads
 
 Code in this repo is under the MIT licence.
